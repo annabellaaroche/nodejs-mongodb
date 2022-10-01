@@ -72,6 +72,7 @@ app.use(cors(corsOptionsDelegate));
  */
  require("./app/routes/auth")(app);
  require("./app/routes/user")(app);
+ require("./app/routes/provider.route")(app);
 
 // simple route
 app.get("/", (req, res) => {
