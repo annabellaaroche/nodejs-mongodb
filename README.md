@@ -50,12 +50,12 @@ http://127.0.0.1:9090/api/auth/signup
 
 ```
 http://127.0.0.1:9090/api/auth/signin
-
+```
 {
     "username": "admin",
     "password": "admin"
 }
-```
+
 
 6. Consumir los otros endpoints
 
