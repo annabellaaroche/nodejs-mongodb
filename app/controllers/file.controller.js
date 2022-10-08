@@ -1,5 +1,6 @@
 const uploadFile = require("../middlewares/upload.middleware");
-
+const fs = require("fs");
+const baseUrl = "http://127.0.0.1:9090/api/files/";
 const upload = async (req, res) => {
   try {
     await uploadFile(req, res);
@@ -19,7 +20,7 @@ const upload = async (req, res) => {
 };
 
 const getListFiles = (req, res) => {
-  const directoryPath = __basedir + "/resources/static/assets/uploads/";
+  const directoryPath = __basedir + "/resources/statics/assets/uploads/";
 
   fs.readdir(directoryPath, function (err, files) {
     if (err) {
@@ -33,7 +34,7 @@ const getListFiles = (req, res) => {
     files.forEach((file) => {
       fileInfos.push({
         name: file,
-        url: baseUrl + file,
+        //url: baseUrl + file,
       });
     });
 
@@ -43,7 +44,7 @@ const getListFiles = (req, res) => {
 
 const download = (req, res) => {
   const fileName = req.params.name;
-  const directoryPath = __basedir + "/resources/static/assets/uploads/";
+  const directoryPath = __basedir + "/resources/statics/assets/uploads/";
 
   res.download(directoryPath + fileName, fileName, (err) => {
     if (err) {

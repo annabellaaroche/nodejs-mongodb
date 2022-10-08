@@ -6,7 +6,7 @@ const controller = require("../controllers/file.controller");
 let routes = (app) => {
   router.post("/api/upload", [authJwt.verifyToken, authJwt.isAdmin], controller.upload);
   router.get("/api/files", [authJwt.verifyToken, authJwt.isAdmin], controller.getListFiles);
-  router.get("/api/files/:name" ,[authJwt.verifyToken, authJwt.isAdmin],  controller.download);
+  router.get("/api/files/:name", [authJwt.verifyToken, authJwt.isAdmin], controller.download);
 
   app.use(router);
 };
