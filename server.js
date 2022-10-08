@@ -5,6 +5,8 @@ const cookieSession = require("cookie-session");
 const dbConfig = require("./app/config/db");
 
 const app = express();
+global.__basedir = __dirname;
+
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -74,6 +76,7 @@ app.use(cors(corsOptionsDelegate));
  require("./app/routes/user")(app);
  require("./app/routes/provider.route")(app);
  require("./app/routes/clients.route")(app);
+ require("./app/routes/file.route")(app);
 
 // simple route
 app.get("/", (req, res) => {

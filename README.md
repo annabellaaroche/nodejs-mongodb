@@ -67,3 +67,4 @@ http://127.0.0.1:9090/api/auth/signin
     "email": "hola@gmail.com",
     "phone": 12345678
 }
+```
