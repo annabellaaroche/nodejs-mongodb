@@ -1,53 +1,53 @@
-const Provider = require('../models/providers.model');
+const { client } = require('../models');
+const Client = require('../models/client.model');
 
-const providers = {
+const clients = {
 
+    //POST Client
 
-    //POST Provider
-
-    createProvider:function(req, res){
-        const provider = new Provider({
+    createClient:function(req, res){
+        const client = new Client({
             name: req.body.name,
             adress: req.body.adress,
             email: req.body.email,
             phone: req.body.phone
           });
           
-          provider.save((err, provider) => {
+          client.save((err, client) => {
             if (err) {
               res.status(500).send({ message: err });
               return;
             }
-            res.send({ message: "El Proveedor se ha guardado correctamente!" });
+            res.send({ message: "El Cliente se ha guardado correctamente!" });
         })
     },
-    // GET get all Providers
-    getProviders: function(req, res) {
-        Provider.find({}).then(data => {
+    // GET get all Clients
+    getClients: function(req, res) {
+        Client.find({}).then(data => {
             res.send(data);
         }).catch(err => {
             res.status(500).send({
-                message: err.message || "Error occurred while retrieving providers."
+                message: err.message || "Error occurred while retrieving clients."
             });
         })
     },
-    // GET Provider by id
-    getProvidersById: function(req, res) {
+    // GET Client by id
+    getClientsById: function(req, res) {
         const id = req.params.id;
-        Provider.findById(id).then(data => {
+        Client.findById(id).then(data => {
             if (!data)
                 res.status(404).send({
-                    message: "Provider with id " + id + " is not found."
+                    message: "Client with id " + id + " is not found."
                 });
             else res.send(data);
         }).catch(err => {
             res.status(500).send({
-                message: err.message || "Error occured while retrieving Provider with id " + id
+                message: err.message || "Error occured while retrieving Client with id " + id
             })
         })
     },
-    // PUT update Provider by id
-    updateProvider: function(req, res) {
+    // PUT update Client by id
+    updateClient: function(req, res) {
         if (!req.body) {
             return res.status(400).send({
                 message: "Data to update can not be empty!"
@@ -56,60 +56,60 @@ const providers = {
 
         const id = req.params.id;
 
-        Provider.findByIdAndUpdate(id, req.body, {
+        Client.findByIdAndUpdate(id, req.body, {
                 useFindAndModify: false
             })
             .then(data => {
                 if (!data) {
                     res.status(404).send({
-                        message: `Failed to update Provider with id=${id}.`
+                        message: `Failed to update Client with id=${id}.`
                     });
                 } else res.send({
-                    message: "Provider was updated successfully."
+                    message: "Client was updated successfully."
                 });
             })
             .catch(err => {
                 res.status(500).send({
-                    message: "Error occured while updating Provider with id=" + id
+                    message: "Error occured while updating Client with id=" + id
                 });
             });
     },
-    // DELETE delete Provider by id
-    deleteProvider: function(req, res) {
+    // DELETE delete Client by id
+    deleteClient: function(req, res) {
         const id = req.params.id;
 
-        Provider.deleteOne({
+        Client.deleteOne({
                 _id: id
             })
             .then(data => {
                 if (!data) {
                     res.status(404).send({
-                        message: `Failed to delete Provider with id=${id}.`
+                        message: `Failed to delete Client with id=${id}.`
                     });
                 } else res.send({
-                    message: "Provider was deleted successfully."
+                    message: "Client was deleted successfully."
                 });
             })
             .catch(err => {
                 res.status(500).send({
-                    message: "Error occured while deleting Provider with id=" + id
+                    message: "Error occured while deleting Client with id=" + id
                 });
             });
     },
-    // DELETE remove all Providers
-    deleteAllProviders: function(req, res) {
-        Provider.deleteMany({})
+    // DELETE remove all Clients
+    deleteAllClients: function(req, res) {
+        Client.deleteMany({})
             .then(data => {
                 res.send({
-                    message: "All Providers was deleted successfully."
+                    message: "All Clients was deleted successfully."
                 });
             })
             .catch(err => {
                 res.status(500).send({
-                    message: "Error occured while deleting all Providers"
+                    message: "Error occured while deleting all Clients"
                 });
             });
     }
 }
 
-module.exports = providers;
+module.exports = clients;

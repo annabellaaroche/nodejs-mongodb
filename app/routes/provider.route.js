@@ -3,6 +3,8 @@ const controller = require("../controllers/provider.controller");
 
 module.exports = function(app) {
   
+  app.post("/api/provider", [authJwt.verifyToken, authJwt.isAdmin], [controller.createProvider]);
+
   app.get("/api/provider/all", [authJwt.verifyToken, authJwt.isAdmin], [controller.getProviders]);
 
   app.get("/api/provider/:id", [authJwt.verifyToken, authJwt.isAdmin], [controller.getProvidersById]);
